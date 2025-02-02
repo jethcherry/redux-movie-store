@@ -6,6 +6,8 @@ function Home() {
   const [movieTitle, setMovieTitle] = useState("");
   const dispatch = useDispatch();
   const movies = useSelector((state) => state.movie);
+  const basket = useSelector((state) => state.basket);
+  const likedMovies = useSelector((state) => state.likedMovies);
 
   function handleAddMovie() {
     if (movieTitle.trim()) {
@@ -37,6 +39,18 @@ function Home() {
         <h2>My Movies</h2>
         <ul>
           {movies.map((movie, index) => (
+            <li key={index}>{movie}</li>
+          ))}
+        </ul>
+        <h2>My Basket{basket.length}</h2>
+        <ul>
+          {basket.map((movie, index) => (
+            <li key={index}>{movie}</li>
+          ))}
+        </ul>
+        <h2>My Movies{likedMovies.lenght}</h2>
+        <ul>
+          {likedMovies.map((movie, index) => (
             <li key={index}>{movie}</li>
           ))}
         </ul>
