@@ -4,6 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 
 function Home() {
   const [movieTitle, setMovieTitle] = useState("");
+  const dispatch = useDispatch();
+
+  function handleAddMovie() {
+    dispatch({ type: "ADD_MOVIE", payload: movieTitle });
+    setMovieTitle("");
+  }
 
   return (
     <>
@@ -16,6 +22,7 @@ function Home() {
         value={movieTitle}
         onChange={(e) => setMovieTitle(e.target.value)}
       />
+      <button onClick={handleAddMovie} >Add Movie</button>
     </>
   );
 }
