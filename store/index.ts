@@ -1,5 +1,7 @@
 import { createStore } from "redux";
 
+
+
 const initialState = {
   movies: [],
   basket: [],
