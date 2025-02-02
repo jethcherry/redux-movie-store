@@ -1,4 +1,3 @@
-
 import { createStore } from "redux";
 
 const initialState = {
@@ -40,7 +39,9 @@ function reducer(state = initialState, action) {
     case "ADD_TO_LIKED_MOVIES":
       return {
         ...state,
-        likedMovies: [...state.likedMovies, action.payload],
+        likedMovies: state.likedMovies.includes(action.payload)
+          ? state.likedMovies.filter((movie) => movie !== action.payload)
+          : [...state.likedMovies, action.payload],
       };
 
     default:

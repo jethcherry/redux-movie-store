@@ -14,9 +14,17 @@ function Home() {
     }
   );
   const basket = useSelector();
-  const likedMovies = useSelector();
+  const likedMovies = useSelector(
+    (state: { likedMovies: string[] }) => state.likedMovies
+  );
 
   function handleAddMovie() {
+    const newMovie = {
+      title: movieTitle,
+      inBaset: false,
+      liked: false,
+    };
+
     if (movieTitle.trim()) {
       dispatch({ type: "ADD_MOVIE", payload: movieTitle });
       setMovieTitle("");
@@ -75,7 +83,7 @@ function Home() {
             <li key={index}>{movie}</li>
           ))}
         </ul>
-        <h2>My Movies{likedMovies.lenght}</h2>
+        <h2>My Movies{likedMovies.length}</h2>
         <ul>
           {likedMovies.map((movie, index) => (
             <li key={index}>{movie}</li>
