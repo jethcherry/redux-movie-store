@@ -2,7 +2,23 @@
 import { createStore } from "redux";
 
 const initialState = {
-  movies: [],
+  movies: [
+    {
+      title: "The GodFather",
+      inBasket: false,
+      liked: false,
+    },
+    {
+      title: "The Terminater",
+      inBasket: false,
+      liked: false,
+    },
+    {
+      title: "The Professional",
+      inBasket: false,
+      liked: false,
+    },
+  ],
   basket: [],
   likedMovies: [],
 };
@@ -21,7 +37,7 @@ function reducer(state = initialState, action) {
         basket: [...state.basket, action.payload],
       };
 
-    case "LIKE_MOVIE":
+    case "ADD_TO_LIKED_MOVIES":
       return {
         ...state,
         likedMovies: [...state.likedMovies, action.payload],
