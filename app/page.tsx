@@ -80,13 +80,13 @@ function Home() {
         <h2>My Basket{basket.length}</h2>
         <ul>
           {basket.map((movie, index) => (
-            <li key={index}>{movie}</li>
+            <li key={index}>{movie.title}</li>
           ))}
         </ul>
         <h2>My Movies{likedMovies.length}</h2>
         <ul>
           {likedMovies.map((movie, index) => (
-            <li key={index}>{movie}</li>
+            <li key={index}>{movie.title}</li>
           ))}
         </ul>
       </div>
