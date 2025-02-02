@@ -16,6 +16,14 @@ function Home() {
     }
   }
 
+  function handleAddToBasket(movie) {
+    dispatch({ type: "ADD_TO_BASKET", payload: movie });
+  }
+
+  function handleAddToLikeMovies(movie) {
+    dispatch({ type: "ADD_TO_LIKED_MOVIES", payload: movie });
+  }
+
   return (
     <>
       <div>
@@ -30,7 +38,7 @@ function Home() {
           onChange={(e) => setMovieTitle(e.target.value)}
         />
         <button
-          onClick={handleAddMovie}
+          onClick={() => handleAddMovie}
           className="border p-1 rounded text-white bg-blue-400"
         >
           Add Movie
@@ -39,7 +47,19 @@ function Home() {
         <h2>My Movies</h2>
         <ul>
           {movies.map((movie, index) => (
-            <li key={index}>{movie}</li>
+            <li key={index}>
+              {movie}
+              <button
+                onClick={() => handleAddToBasket}
+                className="border p-1 rounded text-white bg-blue-400"
+              >
+                Add To Basket
+              </button>
+              <button
+                onClick={() => handleAddToLikeMovies}
+                className="border p-1 rounded text-white bg-blue-400"
+              ></button>
+            </li>
           ))}
         </ul>
         <h2>My Basket{basket.length}</h2>
