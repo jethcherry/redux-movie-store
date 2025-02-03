@@ -1,5 +1,22 @@
 import { createStore } from "redux";
 
+type Movie = {
+  title: string;
+  inBasket: boolean;
+  liked: boolean;
+};
+
+type State = {
+  movies: Movie[];
+  basket: string[];
+  likedMovies: string[];
+};
+
+type Action =
+  | { type: "ADD_MOVIE"; payload: Movie }
+  | { type: "ADD_TO_BASKET"; payload: string }
+  | { type: "ADD_TO_LIKED_MOVIES"; payload: string };
+
 const initialState = {
   movies: [
     {
@@ -22,14 +39,12 @@ const initialState = {
   likedMovies: [],
 };
 
-function reducer(state = initialState, action) {
+function reducer(state: State = initialState, action: Action): State {
   switch (action.type) {
     case "ADD_MOVIE":
       return {
         ...state,
-        basket: state.likedMovies.includes(action.payload)
-          ? state.basket.filter((movie) => movie !== action.payload)
-          : [...state.basket, action.payload],
+        movies: [...state.movies, action.payload],
       };
 
     case "ADD_TO_BASKET":
