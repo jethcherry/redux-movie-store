@@ -15,36 +15,40 @@ import {
   RemoveShoppingCart,
 } from "@mui/icons-material";
 import "../app/pages/home.css";
+import { addMovie, addToLikedMovies, addToBasket } from "@/store";
+
+interface RootState {
+  movies: {
+    title: string;
+    inBasket: boolean;
+    liked: boolean;
+  }[];
+  basket: string[];
+  likedMovies: string[];
+}
 
 function Home() {
   const [movieTitle, setMovieTitle] = useState("");
   const dispatch = useDispatch();
 
-  const movies = useSelector(
-    (state: {
-      movies: { title: string; liked: boolean; inBasket: boolean }[];
-    }) => state.movies
-  );
-
+  const movies = useSelector((state: RootState) => state.movies);
   const basket = useSelector((state: { basket: string[] }) => state.basket);
-  const likedMovies = useSelector(
-    (state: { likedMovies: string[] }) => state.likedMovies
-  );
+  const likedMovies = useSelector((state: RootState) => state.likedMovies);
 
   function handleAddMovie() {
     if (movieTitle.trim()) {
       const newMovie = { title: movieTitle, inBasket: false, liked: false };
-      dispatch({ type: "ADD_MOVIE", payload: newMovie });
+      dispatch(addMovie(newMovie));
       setMovieTitle("");
     }
   }
 
   function handleAddToBasket(movie: string) {
-    dispatch({ type: "ADD_TO_BASKET", payload: movie });
+    dispatch(addToBasket(movie));
   }
 
   function handleAddToLikedMovies(movie: string) {
-    dispatch({ type: "ADD_TO_LIKED_MOVIES", payload: movie });
+    dispatch(addToLikedMovies(movie));
   }
 
   return (
