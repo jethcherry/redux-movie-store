@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   Card,
   CardContent,
-  CardHeader,
   CardActions,
   Button,
   Typography,
@@ -71,7 +70,7 @@ function Home() {
         <h2>My Movies ({movies.length})</h2>
         <ul className="movie-list">
           {movies.map((movie, index) => (
-            <Card key={index}>
+            <Card key={index} className="movie-card">
               <CardContent>
                 <Typography variant="h5" component="h2">
                   {movie.title}{" "}
