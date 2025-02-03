@@ -1,0 +1,152 @@
+/* Global Styles */
+body {
+  background-color: #f0f4f8;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2 {
+  text-align: center;
+  color: #333;
+  font-weight: bold;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+  height: 100vh;
+}
+
+.add-movie {
+  width: 100%;
+  max-width: 800px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.add-movie input {
+  padding: 10px;
+  margin-right: 10px;
+  width: 60%;
+  max-width: 300px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.add-movie button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-movie button:hover {
+  background-color: #45a049;
+}
+
+.movie-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+  padding: 0;
+  list-style: none;
+}
+
+.movie-card {
+  width: 250px;
+  margin: 15px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-content {
+  padding: 16px;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background-color: #f9f9f9;
+  border-top: 1px solid #ddd;
+}
+
+.card-actions button {
+  padding: 8px 16px;
+  font-size: 0.875rem;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.card-actions button:hover {
+  background-color: #1976d2;
+}
+
+.card-header {
+  background-color: #f4f4f4;
+  padding: 10px 16px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.card-header h2 {
+  margin: 0;
+}
+
+/* Basket and Liked Movies */
+ul {
+  padding: 0;
+  list-style: none;
+  margin-top: 15px;
+}
+
+ul li {
+  font-size: 1rem;
+  text-align: center;
+  padding: 8px;
+  margin-bottom: 8px;
+  background-color: #e9e9e9;
+  border-radius: 5px;
+}
+
+ul li:hover {
+  background-color: #d3d3d3;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .add-movie input {
+    width: 80%;
+  }
+
+  .movie-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .movie-card {
+    width: 80%;
+    margin: 10px 0;
+  }
+}
