@@ -1,6 +1,21 @@
 "use client";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardActions,
+  Button,
+  Typography,
+} from "@mui/material";
+import {
+  Favorite,
+  FavoriteBorder,
+  AddShoppingCart,
+  RemoveShoppingCart,
+} from "@mui/icons-material";
+import "../app/pages/home.css";
 
 function Home() {
   const [movieTitle, setMovieTitle] = useState("");
@@ -34,12 +49,12 @@ function Home() {
   }
 
   return (
-    <>
+    <div className="container">
       <div>
         <h1>My Movie List</h1>
       </div>
 
-      <div>
+      <div className="add-movie">
         <input
           type="text"
           placeholder="Enter a movie title"
@@ -54,23 +69,37 @@ function Home() {
         </button>
 
         <h2>My Movies ({movies.length})</h2>
-        <ul>
+        <ul className="movie-list">
           {movies.map((movie, index) => (
-            <li key={index}>
-              {movie.title}{" "}
-              <button
-                onClick={() => handleAddToBasket(movie.title)}
-                className="border p-1 rounded text-white bg-blue-400"
-              >
-                {movie.inBasket ? "Remove from Basket" : "Add to Basket"}
-              </button>{" "}
-              <button
-                onClick={() => handleAddToLikedMovies(movie.title)}
-                className="border p-1 rounded text-white bg-blue-400"
-              >
-                {movie.liked ? "Dislike" : "Like"}
-              </button>
-            </li>
+            <Card key={index}>
+              <CardContent>
+                <Typography variant="h5" component="h2">
+                  {movie.title}{" "}
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button
+                  startIcon={
+                    movie.inBasket ? (
+                      <RemoveShoppingCart />
+                    ) : (
+                      <AddShoppingCart />
+                    )
+                  }
+                  onClick={() => handleAddToBasket(movie.title)}
+                  className="border p-1 rounded text-white bg-blue-400"
+                >
+                  {movie.inBasket ? "Remove from Basket" : "Add to Basket"}
+                </Button>{" "}
+                <Button
+                  startIcon={movie.liked ? <Favorite /> : <FavoriteBorder />}
+                  onClick={() => handleAddToLikedMovies(movie.title)}
+                  className="border p-1 rounded text-white bg-blue-400"
+                >
+                  {movie.liked ? "Dislike" : "Like"}
+                </Button>
+              </CardActions>
+            </Card>
           ))}
         </ul>
 
@@ -88,7 +117,7 @@ function Home() {
           ))}
         </ul>
       </div>
-    </>
+    </div>
   );
 }
 
