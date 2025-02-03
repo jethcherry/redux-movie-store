@@ -65,13 +65,13 @@ function Home() {
             <li key={index}>
               {movie.title}
               <button
-                onClick={() => handleAddToBasket}
+                onClick={() => handleAddToBasket(movie.title)}
                 className="border p-1 rounded text-white bg-blue-400"
               >
-                Add To Basket
+                {!movie.inBasket ? "Add To Basket" : "Remove from basket"}
               </button>
               <button
-                onClick={() => handleAddToLikedMovies}
+                onClick={() => handleAddToLikedMovies(movie.title)}
                 className="border p-1 rounded text-white bg-blue-400"
               >
                 {movie.liked ? "like" : "disliked"}
@@ -82,7 +82,7 @@ function Home() {
         <h2>My Basket{basket.length}</h2>
         <ul>
           {basket.map((movie, index) => (
-            <li key={index}>{movie.title}</li>
+            <li key={index}>{movie}</li>
           ))}
         </ul>
         <h2>My Movies{likedMovies.length}</h2>

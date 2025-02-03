@@ -34,7 +34,12 @@ function reducer(state = initialState, action) {
 
     case "ADD_TO_BASKET":
       return {
-        ...state, 
+        ...state,
+        movies: state.movies.map((movie) =>
+          movie.title === action.payload
+            ? { ...movie, inBasket: !movie.inBasket }
+            : movie
+        ),
         basket: [...state.basket, action.payload],
       };
 
