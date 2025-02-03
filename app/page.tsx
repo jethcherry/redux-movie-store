@@ -35,7 +35,7 @@ function Home() {
     dispatch({ type: "ADD_TO_BASKET", payload: movie });
   }
 
-  function handleAddToLikeMovies(movie) {
+  function handleAddToLikedMovies(movie) {
     dispatch({ type: "ADD_TO_LIKED_MOVIES", payload: movie });
   }
 
@@ -71,9 +71,11 @@ function Home() {
                 Add To Basket
               </button>
               <button
-                onClick={() => handleAddToLikeMovies}
+                onClick={() => handleAddToLikedMovies}
                 className="border p-1 rounded text-white bg-blue-400"
-              ></button>
+              >
+                {movie.liked ? "like" : "disliked"}
+              </button>
             </li>
           ))}
         </ul>
@@ -86,7 +88,7 @@ function Home() {
         <h2>My Movies{likedMovies.length}</h2>
         <ul>
           {likedMovies.map((movie, index) => (
-            <li key={index}>{movie.title}</li>
+            <li key={index}>{movie}</li>
           ))}
         </ul>
       </div>

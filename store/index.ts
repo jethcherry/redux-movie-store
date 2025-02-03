@@ -34,13 +34,18 @@ function reducer(state = initialState, action) {
 
     case "ADD_TO_BASKET":
       return {
-        ...state,
+        ...state, 
         basket: [...state.basket, action.payload],
       };
 
     case "ADD_TO_LIKED_MOVIES":
       return {
         ...state,
+        movies: state.movies.map((movie) =>
+          movie.title === action.payload
+            ? { ...movie, liked: !movie.liked }
+            : movie
+        ),
         likedMovies: state.likedMovies.includes(action.payload)
           ? state.likedMovies.filter((movie) => movie !== action.payload)
           : [...state.likedMovies, action.payload],
