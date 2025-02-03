@@ -17,23 +17,11 @@ type Action =
   | { type: "ADD_TO_BASKET"; payload: string }
   | { type: "ADD_TO_LIKED_MOVIES"; payload: string };
 
-const initialState = {
+const initialState: State = {
   movies: [
-    {
-      title: "The GodFather",
-      inBasket: false,
-      liked: false,
-    },
-    {
-      title: "The Terminater",
-      inBasket: false,
-      liked: false,
-    },
-    {
-      title: "The Professional",
-      inBasket: false,
-      liked: false,
-    },
+    { title: "The GodFather", inBasket: false, liked: false },
+    { title: "The Terminator", inBasket: false, liked: false },
+    { title: "The Professional", inBasket: false, liked: false },
   ],
   basket: [],
   likedMovies: [],
@@ -55,7 +43,9 @@ function reducer(state: State = initialState, action: Action): State {
             ? { ...movie, inBasket: !movie.inBasket }
             : movie
         ),
-        basket: [...state.basket, action.payload],
+        basket: state.basket.includes(action.payload)
+          ? state.basket.filter((movie) => movie !== action.payload)
+          : [...state.basket, action.payload],
       };
 
     case "ADD_TO_LIKED_MOVIES":
@@ -77,5 +67,4 @@ function reducer(state: State = initialState, action: Action): State {
 }
 
 const store = createStore(reducer);
-
 export default store;
