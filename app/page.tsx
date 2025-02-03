@@ -1,41 +1,35 @@
 "use client";
-import { title } from "process";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 function Home() {
   const [movieTitle, setMovieTitle] = useState("");
   const dispatch = useDispatch();
+
   const movies = useSelector(
     (state: {
       movies: { title: string; liked: boolean; inBasket: boolean }[];
-    }) => {
-      state.movies;
-    }
+    }) => state.movies
   );
-  const basket = useSelector();
+
+  const basket = useSelector((state: { basket: string[] }) => state.basket);
   const likedMovies = useSelector(
     (state: { likedMovies: string[] }) => state.likedMovies
   );
 
   function handleAddMovie() {
-    const newMovie = {
-      title: movieTitle,
-      inBaset: false,
-      liked: false,
-    };
-
     if (movieTitle.trim()) {
-      dispatch({ type: "ADD_MOVIE", payload: movieTitle });
+      const newMovie = { title: movieTitle, inBasket: false, liked: false };
+      dispatch({ type: "ADD_MOVIE", payload: newMovie });
       setMovieTitle("");
     }
   }
 
-  function handleAddToBasket(movie) {
+  function handleAddToBasket(movie: string) {
     dispatch({ type: "ADD_TO_BASKET", payload: movie });
   }
 
-  function handleAddToLikeMovies(movie) {
+  function handleAddToLikedMovies(movie: string) {
     dispatch({ type: "ADD_TO_LIKED_MOVIES", payload: movie });
   }
 
@@ -53,40 +47,44 @@ function Home() {
           onChange={(e) => setMovieTitle(e.target.value)}
         />
         <button
-          onClick={() => handleAddMovie}
+          onClick={handleAddMovie}
           className="border p-1 rounded text-white bg-blue-400"
         >
           Add Movie
         </button>
 
-        <h2>My Movies</h2>
+        <h2>My Movies ({movies.length})</h2>
         <ul>
           {movies.map((movie, index) => (
             <li key={index}>
-              {movie.title}
+              {movie.title}{" "}
               <button
-                onClick={() => handleAddToBasket}
+                onClick={() => handleAddToBasket(movie.title)}
                 className="border p-1 rounded text-white bg-blue-400"
               >
-                Add To Basket
-              </button>
+                {movie.inBasket ? "Remove from Basket" : "Add to Basket"}
+              </button>{" "}
               <button
-                onClick={() => handleAddToLikeMovies}
+                onClick={() => handleAddToLikedMovies(movie.title)}
                 className="border p-1 rounded text-white bg-blue-400"
-              ></button>
+              >
+                {movie.liked ? "Dislike" : "Like"}
+              </button>
             </li>
           ))}
         </ul>
-        <h2>My Basket{basket.length}</h2>
+
+        <h2>My Basket ({basket.length})</h2>
         <ul>
           {basket.map((movie, index) => (
-            <li key={index}>{movie.title}</li>
+            <li key={index}>{movie}</li>
           ))}
         </ul>
-        <h2>My Movies{likedMovies.length}</h2>
+
+        <h2>Liked Movies ({likedMovies.length})</h2>
         <ul>
           {likedMovies.map((movie, index) => (
-            <li key={index}>{movie.title}</li>
+            <li key={index}>{movie}</li>
           ))}
         </ul>
       </div>
