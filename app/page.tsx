@@ -1,5 +1,4 @@
 "use client";
-import { title } from "process";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -9,11 +8,10 @@ function Home() {
   const movies = useSelector(
     (state: {
       movies: { title: string; liked: boolean; inBasket: boolean }[];
-    }) => {
-      state.movies;
-    }
+    }) => state.movies
   );
-  const basket = useSelector();
+  const basket = useSelector((state: { basket: string[] }) => state.basket);
+
   const likedMovies = useSelector(
     (state: { likedMovies: string[] }) => state.likedMovies
   );
@@ -26,16 +24,16 @@ function Home() {
     };
 
     if (movieTitle.trim()) {
-      dispatch({ type: "ADD_MOVIE", payload: movieTitle });
+      dispatch({ type: "ADD_MOVIE", payload: newMovies });
       setMovieTitle("");
     }
   }
 
-  function handleAddToBasket(movie) {
+  function handleAddToBasket(movie: string) {
     dispatch({ type: "ADD_TO_BASKET", payload: movie });
   }
 
-  function handleAddToLikedMovies(movie) {
+  function handleAddToLikedMovies(movie: string) {
     dispatch({ type: "ADD_TO_LIKED_MOVIES", payload: movie });
   }
 
